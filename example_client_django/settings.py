@@ -5,9 +5,7 @@ os.environ.setdefault("DJANGO_SECRET_KEY", "qwerty")
 os.environ.setdefault("DEBUG", "1")
 os.environ.setdefault("ALLOWED_HOSTS", "*")
 
-os.environ.setdefault("AUTH_SERVER", "http://auth:8000/")
-os.environ.setdefault("AUTH_CLIENT_ID", "919037")
-os.environ.setdefault("AUTH_CLIENT_SECRET", "32a7bb81fffd18e928109ac6155b165efdcc32ca2890e3aedaeb45cb")
+os.environ.setdefault("AUTH_URL", "http://example:example@aiakosauth.com/")
 
 import dj_database_url
 
@@ -79,10 +77,6 @@ MIDDLEWARE = [
 
 LOGIN_REDIRECT_URL = '/'
 
-ABSOLUTE_URL_OVERRIDES = {
-	'auth.user': lambda u: "/%s/" % u.username,
-}
-
 ROOT_URLCONF = 'example_client_django.urls'
 
 TEMPLATES = [
@@ -111,5 +105,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = 'https://storage.googleapis.com/djangocdn/1.10/'
-MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'

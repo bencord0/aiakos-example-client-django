@@ -1,8 +1,9 @@
 import os
 
-os.environ.setdefault("PYTHONPATH", "..")
+from django.core.wsgi import get_wsgi_application
+from whitenoise.django import DjangoWhiteNoise
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_client_django.settings")
 
-from django.core.wsgi import get_wsgi_application
-
 application = get_wsgi_application()
+application = DjangoWhiteNoise(application)

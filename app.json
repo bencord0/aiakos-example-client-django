@@ -1,0 +1,8 @@
+{
+  "name": "Example Django OpenID Client",
+  "description": "Trivial example OpenID Client app using Django.",
+  "image": "heroku/python",
+  "repository": "https://gitlab.com/aiakos/example-client-django",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ]
+}
