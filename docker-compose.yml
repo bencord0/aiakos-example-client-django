@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  mysql:
+    restart: always
+    image: lew21/mariadb:10.1
+    environment:
+      MYSQL_DATABASE: project
+
+  migrate:
+    restart: on-failure
+    depends_on:
+    - mysql
+    build:
+      context: .
+    environment:
+    - SECRET_KEY=x
+    - DATABASE_URL=mysql://root@mysql/project
+    - AUTH_URL
+    command: ./manage.py migrate
+
+  project:
+    restart: on-failure
+    depends_on:
+    - mysql
+    build:
+      context: .
+    environment:
+    - DATABASE_URL=mysql://root@mysql/project
+    - SECRET_KEY=x
+    - DEBUG
+    - AUTH_URL
+    ports:
+    - "8000:80"
+#    volumes:
+#    - .:/app
+#    command: ["gunicorn", "-k", "gevent", "-b", "[::]:80", "--reload", "project.wsgi"]

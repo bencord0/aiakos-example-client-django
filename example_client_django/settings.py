@@ -1,52 +1,7 @@
 import os
 
-# Remove these if you're forking this app for non-example purposes.
-os.environ.setdefault("DJANGO_SECRET_KEY", "qwerty")
-os.environ.setdefault("DEBUG", "1")
-os.environ.setdefault("ALLOWED_HOSTS", "*")
-
-os.environ.setdefault("AUTH_URL", "http://example:example@aiakosauth.com/")
-
-import dj_database_url
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
-assert SECRET_KEY, "Non-empty DJANGO_SECRET_KEY environment variable is required!"
-
-DEBUG = os.getenv("DEBUG") == "1"
-
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-
-if os.getenv("USE_X_FORWARDED_PROTO", "") == "1":
-	SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-LANGUAGE_CODE = os.getenv("LANG", 'en-us')
-
-DATABASES = {
-	'default': dj_database_url.config(conn_max_age=600, default="sqlite:///" + os.path.join(BASE_DIR, 'example.sqlite3'))
-}
-
-LOGGING = {
-	'version': 1,
-	'disable_existing_loggers': False,
-	'handlers': {
-		'console': {
-			'class': 'logging.StreamHandler',
-		},
-	},
-	'loggers': {
-		'django': {
-			'handlers': ['console'],
-			'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-		},
-	},
-}
-
-RAVEN_CONFIG = {
-    'dsn': os.getenv("RAVEN_URL"),
-}
 
 # Application definition
 
@@ -67,6 +22,7 @@ AUTHENTICATION_BACKENDS = (
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,13 +53,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'example_client_django.wsgi.application'
 
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+from dj12.config import *

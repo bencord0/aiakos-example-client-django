@@ -4,8 +4,8 @@
 
 ```sh
 $ pip3 install -r requirements.txt
-$ python3 manage.py migrate
-$ gunicorn example_client_django.wsgi
+$ SECRET_KEY=x AUTH_URL=http://ea1c25ed-2da9-4c82-a921-b87cff97b646:dummy@localhost.aiakosauth.io:2121/ python3 manage.py migrate
+$ SECRET_KEY=x AUTH_URL=http://ea1c25ed-2da9-4c82-a921-b87cff97b646:dummy@localhost.aiakosauth.io:2121/ gunicorn example_client_django.wsgi
 ```
 
 ## Deploying to Heroku
