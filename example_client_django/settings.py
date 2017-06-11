@@ -32,6 +32,7 @@ MIDDLEWARE = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/auth/'
 
 ROOT_URLCONF = 'example_client_django.urls'
 
