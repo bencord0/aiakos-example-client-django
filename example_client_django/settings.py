@@ -59,3 +59,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 from dj12.config import *
+
+AUTH_SCOPE = tuple(os.getenv("AUTH_SCOPE", "openid").split(","))
