@@ -32,7 +32,7 @@ six = "==1.10.0"
 urllib3 = "==1.21.1"
 whitenoise = "==3.3.0"
 Django = "==2.2.24"
-PyYAML = "==3.13"
+PyYAML = "==5.4"
 
 [requires]
 python_version = "3.7"
